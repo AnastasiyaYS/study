@@ -2,7 +2,18 @@ module Exercise
   module Arrays
     class << self
       def replace(array)
-        array.map { |item| item.positive? ? array.max : item }
+        max = lambda do |full_array|
+          iter = lambda do |part_of_array, max_number|
+            return max_number if part_of_array.empty?
+
+            max_number = max_number < part_of_array[0] ? part_of_array[0] : max_number
+            iter.call(part_of_array[1, part_of_array.length - 1], max_number)
+          end
+          iter.call(full_array, full_array[0])
+        end
+        max_number = max.call(array)
+
+        array.map { |item| item.positive? ? max_number : item }
       end
 
       def search(array, query)
