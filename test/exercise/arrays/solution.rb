@@ -27,7 +27,8 @@ module Exercise
             middle_index + index
           elsif query < middle_item
             iter.call(array_part[0, middle_index], index)
-          else iter.call(array_part[middle_index + 1, middle_index], index + middle_index + 1)
+          else
+            iter.call(array_part[middle_index + 1, middle_index], index + middle_index + 1)
           end
         end
         iter.call(array, 0)
