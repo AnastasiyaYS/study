@@ -15,7 +15,7 @@ module Exercise
 
       def chars_count(films, threshold)
         filtered_films = films.select { |film| !film['rating_kinopoisk'].nil? && film['rating_kinopoisk'].to_f >= threshold }
-        filtered_films.reduce(0) { |i_letter_count, film| i_letter_count + (film['name'].count 'и') }
+        filtered_films.reduce(0) { |i_letter_count, film| i_letter_count + film['name'].count('и') }
       end
     end
   end
