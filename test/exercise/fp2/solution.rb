@@ -13,16 +13,18 @@ module Exercise
 
       # Написать свою функцию my_map
       def my_map(&func)
-        result = MyArray.new
-        my_each(&(->(item) { result << func.call(item) }))
-        result
+        my_reduce(MyArray.new, &(->(acc, item) { acc << func.call(item) }))
       end
 
       # Написать свою функцию my_compact
       def my_compact
-        result = MyArray.new
-        my_each(&(->(item) { result << item unless item.nil? }))
-        result
+        my_reduce(MyArray.new, &(lambda do |acc, item|
+          if item.nil?
+            acc
+          else
+            acc << item
+          end
+        end))
       end
 
       # Написать свою функцию my_reduce
