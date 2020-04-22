@@ -6,9 +6,12 @@ module Exercise
 
       # Написать свою функцию my_each
       def my_each(&func)
-        for item in self
-          func.call(item)
-        end
+        return if empty?
+
+        first, *rest = self
+        func.call(first)
+        MyArray.new(rest).my_each(&func)
+        self
       end
 
       # Написать свою функцию my_map
