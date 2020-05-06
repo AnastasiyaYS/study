@@ -14,6 +14,8 @@ module Inatra
     def call(env)
       method = env['REQUEST_METHOD'].downcase
       arg = env['PATH_INFO']
+      return [404, {}, ['Not Found']] unless @@handlers[method].key? arg
+
       @@handlers[method][arg]
     end
   end
